@@ -1,0 +1,7 @@
+build
+.rugix
+.env
+.bin
+config/aqago-agent.toml
+.aqago-cli.toml
+.DS_Store

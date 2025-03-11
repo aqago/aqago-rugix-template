@@ -1,0 +1,45 @@
+# spell:ignore aqago mgmt tonistiigi binfmt taiki
+
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+
+jobs:
+  build:
+    name: Build and Release
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        job:
+          - system: pi4
+          - system: pi5
+          - system: efi-amd64
+          - system: efi-arm64
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install Just
+        uses: taiki-e/install-action@just
+      - name: Configure `binfmt_misc` for Foreign Architectures
+        run: docker run --privileged --rm tonistiigi/binfmt --install arm64
+      - name: Prepare and Configure
+        shell: bash
+        run: |
+          cat >.aqago-cli.toml <<EOF
+          mgmt-api-url = "${{ secrets.AQAGO_MGMT_URL }}"
+          mgmt-api-key = "${{ secrets.AQAGO_MGMT_KEY }}"
+          EOF
+          cp config/aqago-agent.template.toml config/aqago-agent.toml
+          sed -i "s@%%AQAGO_AGENT_URL%%@${{ secrets.AQAGO_AGENT_URL }}@g" config/aqago-agent.toml
+          sed -i "s@%%AQAGO_MGMT_URL%%@${{ secrets.AQAGO_MGMT_URL }}@g" config/aqago-agent.toml
+          sed -i "s@%%AQAGO_DEVICE_URL%%@${{ secrets.AQAGO_DEVICE_URL }}@g" config/aqago-agent.toml
+          sed -i "s@%%AQAGO_BROKER_URL%%@${{ secrets.AQAGO_BROKER_URL }}@g" config/aqago-agent.toml
+      - name: Build
+        run: just build ${{ matrix.job.system }} --without-compression
+      - name: Fix Permissions
+        # XXX: Not ideal but currently necessary as build files will be owned by root.
+        run: sudo chown -R $(id -u):$(id -g) build
+      - name: Push
+        run: just push ${{ matrix.job.system }} rugix-os-bundle latest ${{ matrix.job.system }}

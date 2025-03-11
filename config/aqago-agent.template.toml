@@ -1,0 +1,7 @@
+agent-api-url = "%%AQAGO_AGENT_URL%%"
+mgmt-api-url = "%%AQAGO_MGMT_URL%%"
+device-api-url = "%%AQAGO_DEVICE_URL%%"
+broker-url = "%%AQAGO_BROKER_URL%%"
+
+[scripts]
+os-id = "/usr/bin/aqago-os-id"

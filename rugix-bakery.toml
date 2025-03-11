@@ -1,0 +1,32 @@
+[repositories]
+rugix-extra = { git = "https://github.com/silitics/rugix-extra.git", branch = "v0.8" }
+aqago-rugix-recipes = { git = "https://github.com/aqago/rugix-recipes.git", branch = "main" }
+
+[systems.efi-amd64]
+layer = "customized-efi"
+architecture = "amd64"
+target = "generic-grub-efi"
+
+[systems.efi-arm64]
+layer = "customized-efi"
+architecture = "arm64"
+target = "generic-grub-efi"
+
+# Compatible with:
+# - Raspberry Pi 5
+# - Raspberry Pi 4 (with recent firmware)
+# - Raspberry Pi CM4 (with recent firmware)
+[systems.pi5]
+layer = "customized-pi"
+architecture = "arm64"
+target = "rpi-tryboot"
+
+# This image includes a firmware update for the Raspberry Pi 4 family.
+#
+# Compatible with:
+# - Raspberry Pi 4
+# - Raspberry Pi CM4
+[systems.pi4]
+layer = "customized-pi4"
+architecture = "arm64"
+target = "rpi-tryboot"
