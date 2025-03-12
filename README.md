@@ -63,10 +63,21 @@ To speed up the build process and disable compression of update bundles, use
 
 ### Pushing the image to Aqago
 
-To push the image to your Aqago backend, run `just push <reference>`. Reference
-is a Docker-like reference, including the name, an optional tag, and variant.
-Formally, `name[:tag[~variant]]`. More information is available in the Aqago
-Backend documentation.
+To push the image to your Aqago backend, run `just push <system>`.
+
+### Enabling the System OTA manager
+
+The image includes a recipe that installs a `systemd` service that periodically
+checks the backend for a new OS update pushed with the `just push <system>`
+command and downloads, verifies, and installs it.
+
+To use this functionality, the application must be created in the backend, then
+enabled on each device on which you'd like to use it.
+
+To create the application in the backend, run `just create-application`.
+
+To enable the application on a specific device, run `just add-application
+<device-id>`.
 
 ## Advanced and Experimental
 

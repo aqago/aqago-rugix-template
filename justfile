@@ -102,7 +102,9 @@ create-application NAME="system-ota-manager-rugix":
         --artifact rugix-os-bundle:latest~efi-arm64 \
         --artifact rugix-os-bundle:latest~efi-amd64 \
         --artifact rugix-os-bundle:latest~pi4 \
-        --artifact rugix-os-bundle:latest~pi5
+        --artifact rugix-os-bundle:latest~pi5 \
+        --configuration config/system-ota-manager-rugix-default.json \
+        --configuration-schema config/system-ota-manager-rugix-schema.json \
 
 
 # Add the system manager application to a device.

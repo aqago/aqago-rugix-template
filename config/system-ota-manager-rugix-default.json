@@ -1,0 +1,4 @@
+{
+    "interval": 3600,
+    "artifact": "rugix-os-bundle:latest"
+}
