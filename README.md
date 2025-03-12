@@ -34,15 +34,15 @@ If running via the GitHub Actions workflow, define `AQAGO_MGMT_URL` and
 #### Local
 
 If running locally, configure the on-device agent with URLs for your Aqago
-backend APIs. To do this, copy the file `config/agent.template.toml` to
-`config/agent.toml` and replace the configuration placeholders.
+backend APIs. To do this, copy the file `config/aqago-agent.template.toml` to
+`config/aqago-agent.toml` and replace the configuration placeholders.
 
 #### GitHub Actions workflow
 
 If running via the GitHub Actions workflow, define `AQAGO_MGMT_URL`,
 `AQAGO_AGENT_URL`, `AQAGO_DEVICE_URL`, and `AQAGO_BROKER_URL` as environment
 secrets. The CI workflow will insert these values into the template
-configuration file (`config/agent.template.toml`).
+configuration file (`config/aqago-agent.template.toml`).
 
 ### Building the image
 
