@@ -105,6 +105,11 @@ create-application NAME="system-ota-manager-rugix":
         --artifact rugix-os-bundle:latest~pi5
 
 
+# Add the system manager application to a device.
+add-application DEVICE NAME="system-ota-manager-rugix:latest":
+    just cli devices add-application {{DEVICE}} {{NAME}}
+
+
 # Run a local version for testing.
 run SYSTEM="efi-arm64":
     ./run-bakery run {{SYSTEM}}
