@@ -35,7 +35,7 @@ install:
         exit 1
     fi
 
-    BASE_URL="https://aqago-agent-and-cli-binaries-dev.s3.us-east-1.amazonaws.com"
+    BASE_URL="https://aqago-agent-and-cli-binaries.s3.us-east-1.amazonaws.com"
 
     LATEST_VERSION=$(curl -sfSL "$BASE_URL/latest")
     echo "Latest Aqago Version: ${LATEST_VERSION}"
